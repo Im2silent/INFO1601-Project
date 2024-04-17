@@ -1,0 +1,89 @@
+:root{
+  --primary-color: rgba(139, 69, 19, 0.5);
+  --secondary-color: #333333;
+  --other-color: #666666;
+  --other-color1: rgba(255, 99, 71, 0.6);
+  --background-img: url(https://thumbs.dreamstime.com/b/bakery-background-ingredients-cooking-christmas-baking-flour-brown-sugar-butter-cranberry-spices-wooden-table-160471667.jpg);
+  --button-color: #ff7f50;
+  --button-color1: #fff;
+  --recipe-background-color: rgba(255, 255, 255, 0.6);
+
+}
+
+
+.dark-theme{
+  --primary-color:  #0D0620;
+  --secondary-color: #fff;
+ --recipe-background-color: rgba(25, 25, 112, 0.6);
+  --other-color: antiquewhite;
+    --other-color1: rgba(255, 99, 71, 0.5);
+    --background-img: url(https://images.unsplash.com/photo-1564540586988-aa4e53c3d799?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+    --button-color: #ff7f50;
+    --button-color1: #fff;
+  }
+
+
+
+.rand-drink-card {
+  background-color: var(--recipe-background-color);
+  border-radius: 12px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin: 20px auto; 
+  width: 80%; 
+  max-width: 400px; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.rand-drink-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.2); 
+}
+
+.rand-drink-img img {
+  width: 100%;
+  height: 200px; 
+  object-fit: cover;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.rand-drink-card:hover .rand-drink-img img {
+  transform: scale(1.05); 
+}
+
+.rand-drink-name {
+  padding: 15px 20px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.rand-drink-card:hover .rand-drink-name {
+  background-color: rgba(255, 255, 255, 0.6); 
+}
+
+.rand-drink-name h3 {
+  margin: 0;
+  font-size: 22px; 
+  color:  var(--secondary-color);
+  transition: color 0.3s ease;
+}
+
+.rand-drink-card:hover .rand-drink-name h3 {
+  color: #ff7f50; 
+}
+
+.category,
+.alcohol,
+.glass {
+  padding: 10px 20px;
+  color:  var(--other-color);
+  font-size: 16px;
+}
+
+.str-instructions {
+  padding: 15px 20px;
+  color:  var(--secondary-color);
+  font-size: 16px; 
+}

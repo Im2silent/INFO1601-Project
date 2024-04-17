@@ -27,14 +27,13 @@
 
 
     <div class="search-box">
-      <button onclick="getData()" class="btn-search"><i class="fas fa-search"></i></button>
+      <button onclick="getDrink()" class="btn-search"><i class="fas fa-search"></i></button>
       <input type="text" class="input-search" placeholder="Enter Ingredient...">
     </div>
 
     <div class="theme">
       <img src="moon.png" alt="night-theme" id="icon">
     </div>
-
   </nav>
 
   <main>
@@ -86,14 +85,22 @@
       event.preventDefault();
 
 
-      await getData();
+      await getDrink();
     }
   });
 
 
   async function getData() {
+
+    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Vodka`);
+    const data = await response.json();
+    displayMeal(data);
+
+  }
+
+  async function getDrink() {
     let searchInputTxt = document.querySelector('.input-search').value.trim();
-    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchInputTxt}`);
+    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${searchInputTxt}`);
     const data = await response.json();
     displayMeal(data);
 
@@ -103,16 +110,16 @@
     const container = document.querySelector('#meal-container');
     let html = "";
 
-    if (data.meals) {
-      data.meals.forEach(meal => {
+    if (data.drinks) {
+      data.drinks.forEach(drink => {
         html += `
-                  <div  class = "meal-card" data-id = "${meal.idMeal}">
+                  <div  class = "meal-card" data-id = "${drink.idDrink}">
                       <div  class = "meal-img">
-                          <img src = "${meal.strMealThumb}" alt = "food">
+                          <img src = "${drink.strDrinkThumb}" alt = "food">
                       </div>
                       <div   class = "meal-name">
-                          <h3>${meal.strMeal}</h3>
-                          <button id="recipe-toggle" onclick = "getRecipe(${meal.idMeal})" class = "recipe-btn" ">Get Recipe</button>
+                          <h3>${drink.strDrink}</h3>
+                          <button id="recipe-toggle" onclick = "getRecipe(${drink.idDrink})" class = "recipe-btn" ">Get Recipe</button>
                          
                           
                       </div>
@@ -129,12 +136,15 @@
     container.innerHTML = html;
   }
 
+
+
+
   function getRecipe(mID) {
-    const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mID}`;
+    const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${mID}`;
     fetch(url)
       .then(response => response.json())
       .then(data => {
-        const recipe = data.meals[0];
+        const recipe = data.drinks[0];
 
         const existingRecipeContainer = document.querySelector('.recipe-details-container');
         if (existingRecipeContainer) {
@@ -145,24 +155,32 @@
         recipeContainer.classList.add('recipe-details-container');
         recipeContainer.innerHTML = `
            <aside>
-             <h2 class="recipe-title">${recipe.strMeal}</h2>
+             <h2 class="recipe-title">${recipe.strDrink}</h2>
              <p class="recipe-category">Category: ${recipe.strCategory}</p>
+             
+             <div class="recipe-meal-img">
+                <img src="${recipe.strDrinkThumb}" alt="">
+             </div>
+             <div class="recipe-instruct">
+                <h3>Type:</h3>
+                <p>${recipe.strAlcoholic}</p>
+             </div>
+             
+             <div class="recipe-instruct">
+                <h3>Glass Type:</h3>
+                <p>${recipe.strGlass}</p>
+             </div>
+             
              <div class="recipe-instruct">
                 <h3>Instructions:</h3>
                 <p>${recipe.strInstructions}</p>
              </div>
-             <div class="recipe-meal-img">
-                <img src="${recipe.strMealThumb}" alt="">
-             </div>
-             <div class="recipe-link">
-                <a href="${recipe.strYoutube}" target="_blank">Watch Video</a>
-             </div>
+             
            </aside>
           `;
 
         document.body.appendChild(recipeContainer);
-        
-        recipeContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
 
         const closeButton = document.createElement('button');
         closeButton.textContent = 'x';
@@ -170,6 +188,7 @@
         recipeContainer.appendChild(closeButton);
 
         closeButton.addEventListener('click', function () {
+
           recipeContainer.remove();
         });
       });
@@ -191,6 +210,7 @@
 
 
   getData();
+
 </script>
 
 </html>
