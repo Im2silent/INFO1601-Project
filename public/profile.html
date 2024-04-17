@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header class="navbar">
+    <a href="index.html" class="logo-link"><img src="WGC.png" alt="logo" class="logo-image"></a>
+    <a href="index.html" class="logo-link"><h1 class="logo">WE GO COOK</h1></a>
+    <div class="menu-links">
+      <a href="index.html" class="nav-link" id="back-btn">Back</a>
+      <a href="#" class="nav-link nav-link-logout">Sign Out</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="profile-container">
+      <h2>Welcome to your profile</h2>
+      <div id="user-info"></div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2024 WE GO COOK. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="auth.js"></script>
+  <script>
+    const userInfoContainer = document.getElementById('user-info');
+    const signOutLink = document.querySelector('.nav-link-logout');
+
+    // Function to display user information
+    function displayUserInfo(user) {
+      const userInfo = `
+        <p><strong>Name:</strong> ${user.displayName}</p>
+        <p><strong>Email:</strong> ${user.email}</p>
+        <p><strong>UID:</strong> ${user.uid}</p>
+      `;
+      userInfoContainer.innerHTML = userInfo;
+    }
+
+    // Listen for authentication state changes
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in
+        displayUserInfo(user);
+      } else {
+        // No user is signed in
+        console.log("No user signed in.");
+        window.location.href = "login.html"; // Redirect to login page if not signed in
+      }
+    });
+
+    // Sign out functionality
+    signOutLink.addEventListener('click', (event) => {
+      event.preventDefault();
+      logOut();
+    });
+  </script>
+</body>
+
+</html>

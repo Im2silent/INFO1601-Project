@@ -2,48 +2,37 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Page</title>
-  <link rel="stylesheet" href="login-style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="login-style.css">
 </head>
 
 <body>
-
-
-  <main>
-
-
-    <div class="login-container">
-
-
-
-
-
-      <div class="login-card">
-        <img src="WGC.png" alt="logo" class="logo-image"> 
-        <h2>Login</h2>
-        <form class="login-form">
-          <div class="input-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" required>
-          </div>
-          <div class="input-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
-          </div>
-          <button type="submit">Login</button>
-        </form>
-        <p class="register-link">Don't have an account? <a href="signUp.html">Sign Up</a></p>
-      </div>
-
-
-    </div>
-
-    </div>
-
-  </main>
-
+    <a href="index.html" class="nav-link" id="back-btn">Back</a>
+    <main>
+        <div class="login-container">
+            <div class="login-card">
+                <img src="WGC.png" alt="logo" class="logo-imageL">
+                <h2>Login</h2>
+                <!-- Button for Google Sign-In -->
+                
+                <button id="google-sign-in-btn" class="login-google-btn">Login with Google</button>
+                <!-- End of Google Sign-In button -->
+            </div>
+        </div>
+    </main>
+    <!-- Load auth.js script first -->
+    <script type="module" src="auth.js" defer></script>
+    <script type ="module">
+      import { signInWithGoogle } from './auth.js';
+        // Wait for DOMContentLoaded event before accessing DOM elements
+        document.addEventListener("DOMContentLoaded", function() {
+            // Add event listener to the Google Sign-In button
+            document.getElementById("google-sign-in-btn").addEventListener("click", signInWithGoogle);
+        });
+    </script>
 </body>
 
 </html>

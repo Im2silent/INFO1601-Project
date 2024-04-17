@@ -1,3 +1,6 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyAGnGQ5tAX6KEHL1RyqAf6VII7X4MacZmg",
   authDomain: "are-we-cooking.firebaseapp.com",
@@ -7,4 +10,8 @@ const firebaseConfig = {
   appId: "1:776897844103:web:76cb639bf2a3683b953922"
 };
 
-  export default firebaseConfig;
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+export default firebaseConfig;
+export {app, auth};

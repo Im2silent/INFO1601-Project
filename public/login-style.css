@@ -89,3 +89,10 @@ button:hover {
 .register-link a:hover {
   text-decoration: underline;
 }
+
+.logo-imageL {
+  display: block;
+  margin: 0 auto; /* This will center the logo horizontally */
+  max-width: 200px; /* Adjust the max-width as needed */
+  height: auto;
+}

@@ -4,11 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign Up</title>
+  <link href="style.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="signup.css">
 </head>
 <body>
+  <a href="index.html" class="nav-link" id="back-btn">Back</a>
   <div class="signup-container">
-    <form class="signup-form" action="#">
+    <form class="signup-form" action="#" onsubmit="signUpFormSubmit(event)">
       <img src="WGC.png" alt="logo" class="logo-image"> 
       <h2>Sign Up</h2>
       <div class="input-group">
@@ -30,5 +32,15 @@
       <button type="submit">Sign Up</button>
     </form>
   </div>
+  <script type="module" src="auth.js"></script>
 </body>
+<script>
+  function signUpFormSubmit(event) {
+    event.preventDefault(); 
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    signUp(username, email, password); 
+  }
+</script>
 </html>
