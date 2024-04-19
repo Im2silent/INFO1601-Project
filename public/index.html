@@ -93,12 +93,66 @@
 
 
   async function getData() {
-    let searchInputTxt = document.querySelector('.input-search').value.trim();
-    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchInputTxt}`);
-    const data = await response.json();
-    displayMeal(data);
+
+
+
+      let searchInputTxt = document.querySelector('.input-search').value.trim();
+
+
+
+      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchInputTxt}`);
+      const data = await response.json();
+      if (data.meals) {
+          displayMeal(data);
+      } else {
+
+          const byNameResponse = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchInputTxt}`);
+          const byNameData = await byNameResponse.json();
+          if (byNameData.meals) {
+              displayMeal(byNameData);
+          } else {
+
+              const byCategoryResponse = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${searchInputTxt}`);
+              const byCategoryData = await byCategoryResponse.json();
+
+
+              if (byCategoryData.meals) {
+                  displayMeal(byCategoryData);
+              } else {
+
+                const byAreaResponse = await fetch(`https://themealdb.com/api/json/v1/1/filter.php?a=${searchInputTxt}`);
+                const byAreaData = await byAreaResponse.json();
+
+
+                if (byAreaData.meals) {
+                    displayMeal(byAreaData);
+                } else {
+
+                  getById();
+
+                }
+              }
+          }
+      }
+  }
+
+
+
+  async function getById(){
+      let searchInputTxt = document.querySelector('.input-search').value.trim();
+      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${searchInputTxt}`);
+      const data = await response.json();
+    if (data.meals) {
+        displayMeal(data);
+    } else {
+
+        await  getData();
+    }
+
+
 
   }
+
 
   function displayMeal(data) {
     const container = document.querySelector('#meal-container');
@@ -113,9 +167,10 @@
                       </div>
                       <div   class = "meal-name">
                           <h3>${meal.strMeal}</h3>
+                          <p class="meal-ID" >ID: ${meal.idMeal}</p>  
                           <button id="recipe-toggle" onclick = "getRecipe(${meal.idMeal})" class = "recipe-btn" ">Get Recipe</button>
-                         
-                          
+
+
                       </div>
                   </div>
               `;
@@ -145,9 +200,10 @@
         const recipeContainer = document.createElement('div');
         recipeContainer.classList.add('recipe-details-container');
         recipeContainer.innerHTML = `
-           <aside>
+          <aside>
              <h2 class="recipe-title">${recipe.strMeal}</h2>
-             <p class="recipe-category">Category: ${recipe.strCategory}</p>
+             <p class="recipe-cate-are">Category: ${recipe.strCategory}</p>
+             <p class="recipe-cate-are">Area: ${recipe.strArea}</p>
              <div class="recipe-instruct">
                 <h3>Instructions:</h3>
                 <p>${recipe.strInstructions}</p>
