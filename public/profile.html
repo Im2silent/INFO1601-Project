@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <link href="style.css" rel="stylesheet" type="text/css">
+  <link href="profile.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header class="navbar">
+    <a href="index.html" class="nav-link" id="back-btnp">Back</a>
+    <a href="index.html" class="logo-link"><img src="WGC.png" alt="logo" class="logo-image"></a>
+    <h1 class="profile-title">Profile</h1>
+    <div class="menu-links">
+      
+      <a href="#" class="nav-link nav-link-logout">Sign Out</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="profile-container">
+      <h2>Welcome to your Profile</h2>
+      <div id="user-info"></div>
+
+      <div class="leave-review">
+        <h2>Leave a Review</h2>
+        <textarea id="review-text" rows="4" placeholder="Enter your review"></textarea>
+    
+        <button id="submit-review">Submit</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2024 WE GO COOK. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="auth.js"></script>
+  <script type="module">
+    import { logOut } from './auth.js';
+    import { auth } from './fireBaseConfig.js';
+    import { submitReview } from './auth.js';
+    const userInfoContainer = document.getElementById('user-info');
+    const signOutLink = document.querySelector('.nav-link-logout');
+
+    // Function to display user information
+    function displayUserInfo(user) {
+      const profileCard = `
+        <img src="${user.photoURL}" alt="Profile Picture">
+        <p><strong>Name:</strong> ${user.displayName}</p>
+        <p><strong>Email:</strong> ${user.email}</p> `;
+      userInfoContainer.innerHTML = profileCard;
+    }
+
+    function handleReviewSubmission(displayName) {
+      const reviewText = document.getElementById('review-text').value;
+
+      if (reviewText.trim() === '') {
+        alert('Please enter a review.');
+        return;
+      }
+      
+      
+
+      submitReview(reviewText, displayName);
+    }
+
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        
+        displayUserInfo(user);
+
+        const submitReviewButton = document.getElementById('submit-review');
+
+        // Add event listener to submit review button
+        submitReviewButton.addEventListener('click', () => {
+          handleReviewSubmission(user.displayName);
+        })
+      }
+    });
+
+    const submitReviewButton = document.getElementById('submit-review');
+    submitReviewButton.addEventListener('click', handleReviewSubmission);
+
+    // Sign out functionality
+    signOutLink.addEventListener('click', (event) => {
+      event.preventDefault();
+      logOut();
+      window.location.href = "login.html"; 
+    });
+  </script>
+</body>
+
+</html>

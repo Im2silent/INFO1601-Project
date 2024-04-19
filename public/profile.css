@@ -1,0 +1,87 @@
+.profile-title {
+  margin: 0 auto;
+  font-size: 40px;
+}
+
+.profile-container {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  width: 90%; 
+  max-width: 500px; 
+  margin: 0 auto;
+}
+
+.profile-container h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 20px 0;
+  text-align: center;
+}
+
+#review-text {
+  width: 100%; 
+  padding: 10px; 
+  font-size: 16px; 
+  font-family: Arial, Helvetica, sans-serif;
+  border: 3px solid #ff7f50; 
+  border-radius: 5px; 
+  box-sizing: border-box;
+}
+
+#review-text:focus {
+  outline: none; 
+  border: 3px solid #fa5e25; 
+}
+
+#submit-review { 
+  display: flex;
+  margin: 20px auto; 
+  background-color: #ff7f50; 
+  border-color: #fa5e25; 
+  color: white; 
+  padding: 15px 30px; 
+  font-size: 16px; 
+  cursor: pointer; 
+  border-radius: 10px; 
+}
+
+#submit-review:hover {
+  border-color: #ff7f50;
+  background-color: #fa5e25; 
+}
+
+#user-info {
+  text-align: center; 
+  font-family: Arial, Helvetica, sans-serif;
+}
+#user-info img {
+  margin-top: 20px;
+  width: 150px; 
+  height: 150px;
+  border-radius: 50%; 
+  margin-bottom: 20px; 
+}
+
+.nav-link-logout{
+  background-color: #ff7f50;
+  top:20px;
+  left:20px;
+}
+  
+.nav-link-logout:hover{
+  background-color: orange;
+}
+
+#back-btnp{
+  background-color: #ff7f50;
+  text-decoration: none;
+  
+}
+
+#back-btnp:hover{
+  background-color: orange;
+}
